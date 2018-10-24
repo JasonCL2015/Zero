@@ -3,10 +3,12 @@ package com.jason.zero.utils;
 import com.jason.zero.enums.EPlatform;
 
 /**
+ * All rights Reserved, Designed By www.maihaoche.com
  * 操作系统类：获取System.getProperty("os.name")对应的操作系统
- * @Package com.jason.zero.utils
- * @author: wenyuan
- * @date: 2018/10/19 5:03 PM
+ *
+ * @author 文远
+ * @version 0.0.1
+ * @since 0.0.1
  */
 public class OSInfo {
 
@@ -18,18 +20,38 @@ public class OSInfo {
 
     private OSInfo() {}
 
+    /**
+     * Is linux boolean.
+     *
+     * @return the boolean
+     */
     public static boolean isLinux() {
         return OS.contains("linux");
     }
 
+    /**
+     * Is mac os boolean.
+     *
+     * @return the boolean
+     */
     public static boolean isMacOS() {
         return OS.contains("mac") && OS.contains("os") && !OS.contains("x");
     }
 
+    /**
+     * Is mac osx boolean.
+     *
+     * @return the boolean
+     */
     public static boolean isMacOSX() {
         return OS.contains("mac") && OS.contains("os") && OS.contains("x");
     }
 
+    /**
+     * Is windows boolean.
+     *
+     * @return the boolean
+     */
     public static boolean isWindows() {
         return OS.contains("windows");
     }
@@ -131,6 +153,11 @@ public class OSInfo {
         return instance.platform;
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         System.out.println(OSInfo.getOSname());
     }

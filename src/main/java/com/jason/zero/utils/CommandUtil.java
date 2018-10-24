@@ -4,19 +4,28 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 
+
 /**
- * @Package com.jason.zero.utils
- * @author: wenyuan
- * @date: 2018/10/19 4:45 PM
+ * All rights Reserved, Designed By www.maihaoche.com
+ *
+ *
+ * @author 文远
+ * @version 0.0.1
+ * @since 0.0.1
  */
 public class CommandUtil {
 
 
-
-
-    /*该方法实现文件自动复制功能。利用系统命令将指定文件名从源路径复制到目的路径
-         * 如果目的路径不存在时，自动创建目的路径
-         * */
+    /**
+     * Copy file boolean.
+     * 该方法实现文件自动复制功能。利用系统命令将指定文件名从源路径复制到目的路径
+     * 如果目的路径不存在时，自动创建目的路径
+     * @param origpath the origpath
+     * @param destpath the destpath
+     * @param filename the filename
+     * @return the boolean
+     * @throws Exception the exception
+     */
     public static boolean copyFile(String origpath, String destpath, String filename) throws Exception {
         String osName = System.getProperty("os.name");
         boolean flag = false;
@@ -41,6 +50,12 @@ public class CommandUtil {
 
     }
 
+    /**
+     * Exec object.
+     *
+     * @param cmd the cmd
+     * @return the object
+     */
     public static Object exec(String cmd) {
         try {
             String[] cmdA = {"/bin/sh", "-c", cmd};
@@ -60,19 +75,26 @@ public class CommandUtil {
         return null;
     }
 
+    /**
+     * Exe cmd string.
+     *
+     * @param commandStr the command str
+     * @return the string
+     */
     public static String exeCmd(String commandStr) {
-//        String[] cmdA;
-//        if (OSInfo.isLinux() || OSInfo.isMacOS() || OSInfo.isMacOSX()) {
-//            cmdA = new String[]{"/bin/sh", "-c"};
-//        }
-//        if (OSInfo.isWindows()) {
-//            cmdA = new String[]{"cmd exe", "-c"};
-//        }
+        String[] cmdA = new String[0];
+        if (OSInfo.isLinux() || OSInfo.isMacOS() || OSInfo.isMacOSX()) {
+            cmdA = new String[]{"/bin/sh", "-c", commandStr};
+
+        }
+        if (OSInfo.isWindows()) {
+            cmdA = new String[]{"cmd exe", "-c", commandStr};
+        }
 
         BufferedReader br = null;
         StringBuilder sb = new StringBuilder();
         try {
-            Process p = Runtime.getRuntime().exec(commandStr);
+            Process p = Runtime.getRuntime().exec(cmdA);
             br = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line = null;
 
@@ -97,6 +119,11 @@ public class CommandUtil {
         return sb.toString();
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
 //        try {
@@ -119,6 +146,11 @@ public class CommandUtil {
         String commandStr = "ls -l";
         //String commandStr = "ipconfig";
         exeCmd(commandStr);
+
+        String a = "find / -type d -name \"biubiu\"  | xargs rm -rf && [ -w /xxx/xxx ] && echo \"Hello world\" > /xxx/xxx || echo \"Hello" +
+                " world\" > " +
+                "/yyy/yyy";
+
     }
 
 }
